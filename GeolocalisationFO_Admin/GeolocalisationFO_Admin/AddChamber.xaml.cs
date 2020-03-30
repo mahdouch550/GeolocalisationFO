@@ -30,7 +30,7 @@ namespace GeolocalisationFO_Admin
             {
                 Chambers = new List<Chamber>();
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chambers.json"), JsonConvert.SerializeObject(Chambers));
-            }            
+            }
         }
 
         public void AddButton_Clicked(object sender, EventArgs e)
@@ -55,10 +55,10 @@ namespace GeolocalisationFO_Admin
             {
                 DisplayAlert("Erreur", "Verifier les valuers entrées", "Ok");
             }
-        }        
+        }
 
         private bool FieldsValidated()
-        {
+        {             
             return !String.IsNullOrEmpty(ChamberNameEntry.Text) && !String.IsNullOrEmpty(LongitudeEntry.Text) && !String.IsNullOrEmpty(LatitudeEntry.Text);
         }
 

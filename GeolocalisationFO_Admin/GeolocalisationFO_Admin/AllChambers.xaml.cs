@@ -34,19 +34,27 @@ namespace GeolocalisationFO_Admin
                     ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(y => y.Name).ToList());
                 });
                 CurrentChamber.Text = "";
+                if(Chambers.Count == 0)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        DeleteButton.IsEnabled = false;
+                        EditButton.IsEnabled = false;
+                    });
+                }
             }
         }
 
         private void EditButton_Clicked(object sender, EventArgs e)
         {
-
+        
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
-
+              
         protected override void OnAppearing()
         {
             try
@@ -59,13 +67,21 @@ namespace GeolocalisationFO_Admin
                 Chambers = new List<Chamber>();
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chambers.json"), JsonConvert.SerializeObject(Chambers));
             }
-            ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(x => x.Name).ToList());
+            Device.BeginInvokeOnMainThread(() => 
+            {
+                ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(x => x.Name)).ToList();
+            });
         }
 
         private void ChambersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var c = Chambers.FirstOrDefault(x => x.Name == ChambersListView.SelectedItem.ToString());
             CurrentChamber.Text = $"Nom: {c.Name}\n\n\n\nLongitude: {c.Longitude}\n\n\n\nLatitude: {c.Latitude}";
+            Device.BeginInvokeOnMainThread(() => 
+            {
+                DeleteButton.IsEnabled = true;
+                EditButton.IsEnabled = true;
+            });
         }
     }
 }
