@@ -14,57 +14,55 @@ using Xamarin.Forms.Xaml;
 namespace GeolocalisationFO_Admin
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChamberEdit : ContentPage
+    public partial class TechnicianEdit : ContentPage
     {
-        private List<Chambre> Chambers;
-        private Chambre Chamber;
+        private Technicien Technicien;
+        private ActivityIndicator ActivityIndicator;
 
-        public ChamberEdit(Chambre Chamber)
+        public TechnicianEdit(Technicien technicien)
         {
-            NavigationPage.SetHasNavigationBar(this, false);
-            NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
-            this.Chamber = Chamber;            
+            this.Technicien = technicien;
+            ActivityIndicator = new ActivityIndicator();
         }
 
         private void ValidateButton_Clicked(object sender, EventArgs e)
         {
-            //Verify fields are valid
             if (FieldsValidated())
             {
                 try
                 {
                     //instanciate the new item
-                    var newChamber = new Chambre { Nom = ChamberNameEntry.Text, Longitude = float.Parse(LongitudeEntry.Text), Latitude = float.Parse(LatitudeEntry.Text) };
+                    var newTechnicien = new Technicien { Nom = TechnicianNameEntry.Text, Login = LoginEntry.Text, MotDePasse = PaswordEntry.Text };
                     //Create json object containing two items (old and new)
-                    var jsonChambers = JsonConvert.SerializeObject(new List<Chambre> { Chamber, newChamber });
+                    var jsonTechniciens = JsonConvert.SerializeObject(new List<Technicien> { Technicien, newTechnicien });
                     //Create a byte array of the jon object for the request
-                    var bytesChambers = Encoding.UTF8.GetBytes(jsonChambers);
+                    var bytesTechniciens = Encoding.UTF8.GetBytes(jsonTechniciens);
                     //Create the request
-                    var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/UpdateChamber");
+                    var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/UpdateTechnician");
                     //Set the request method to put
                     req.Method = "PUT";
                     //Set the request content-type to application/json
                     req.ContentType = "application/json";
                     //Write the data in the request stream
-                    req.GetRequestStream().Write(bytesChambers, 0, bytesChambers.Length);
+                    req.GetRequestStream().Write(bytesTechniciens, 0, bytesTechniciens.Length);
                     //Get the response as a string using StreamReader
                     var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
                     //Check if the response matches the expected output
-                    if (resp.Equals("Chamber updated Successfully"))
+                    if (resp.Equals("Technician updated Successfully"))
                     {
                         //Show confirmation alert
-                        DisplayAlert("Succés","Chambre modifiée avec succés","Ok");
+                        DisplayAlert("Succés", "Technicien modifiée avec succés", "Ok");
                         //Close the Edit Page => go back to All Chambers page
                         Navigation.PopAsync();
                     }
                     else
                     {
                         //The response is not as expected
-                        DisplayAlert("Échec", "La modification de chambre a échoué", "ok");
+                        DisplayAlert("Échec", "La modification de technicien a échoué", "ok");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     DisplayAlert("Erreur", "Verifier les valuers entrées", "Ok");
@@ -78,7 +76,7 @@ namespace GeolocalisationFO_Admin
 
         private bool FieldsValidated()
         {
-            return !String.IsNullOrEmpty(ChamberNameEntry.Text) && !String.IsNullOrEmpty(LongitudeEntry.Text) && !String.IsNullOrEmpty(LatitudeEntry.Text);
+            return !String.IsNullOrEmpty(TechnicianNameEntry.Text) && !String.IsNullOrEmpty(LoginEntry.Text) && !String.IsNullOrEmpty(PaswordEntry.Text);
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
@@ -86,17 +84,14 @@ namespace GeolocalisationFO_Admin
             Navigation.PopAsync();
         }
 
-        //Add the override OnAppearing method
         protected override void OnAppearing()
         {
-            //Fill he form with the selected item
             Device.BeginInvokeOnMainThread(() => 
             {
-                ChamberNameEntry.Text = Chamber.Nom;
-                LongitudeEntry.Text = Chamber.Longitude.ToString();
-                LatitudeEntry.Text = Chamber.Latitude.ToString();
-                //At this moment, the form is ready to be changed
+                TechnicianNameEntry.Text = Technicien.Nom;
+                LoginEntry.Text = Technicien.Login;
+                PaswordEntry.Text = Technicien.MotDePasse;
             });
-        }         
+        }
     }
 }

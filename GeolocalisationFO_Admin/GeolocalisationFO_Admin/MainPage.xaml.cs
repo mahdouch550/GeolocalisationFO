@@ -29,5 +29,20 @@ namespace GeolocalisationFO_Admin
         {
             Navigation.PushAsync(new AllChambers());
         }
+
+        public void AddTechnician_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddTechnician());
+        }
+
+        public void AllTechnicians_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AllTechnicians());
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

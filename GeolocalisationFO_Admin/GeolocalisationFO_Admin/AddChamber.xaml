@@ -8,7 +8,7 @@
     <Grid>
         <Label Text="Ajouter Chambre" FontSize="Title" TextColor="Blue" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
         <Label Text="Nom" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
-        <Entry Placeholder="Nom du chambre" x:Name="ChamberNameEntry" ReturnType="Next" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Entry Placeholder="Nom du chambre" MaxLength="10" x:Name="ChamberNameEntry" ReturnType="Next" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
         <Label Text="Longitude" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
         <Entry Placeholder="Longitude du position du chambre" ReturnType="Next" Keyboard="Numeric" x:Name="LongitudeEntry" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
         <Label Text="Latitude" Grid.Row="5" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>

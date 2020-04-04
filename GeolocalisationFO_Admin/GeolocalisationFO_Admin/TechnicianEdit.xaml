@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GeolocalisationFO_Admin.TechnicianEdit">
+    <Grid>
+        <Label Text="Modifier Technicien" FontSize="Title" TextColor="Blue" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Label Text="Nom" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Entry Placeholder="Nom du Technicien" x:Name="TechnicianNameEntry" ReturnType="Next" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Label Text="Login" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Entry Placeholder="Nom d'utilisateur du technicien" ReturnType="Next" x:Name="LoginEntry" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Label Text="Mot de passe" Grid.Row="5" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Entry Placeholder="Mot de passe" ReturnType="Done" x:Name="PaswordEntry" Grid.Row="6" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+        <Button Text="Valider" x:Name="ValidateButton" Clicked="ValidateButton_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="7" Grid.Column="0"/>
+        <Button Text="Retour"  x:Name="BackButton" Clicked="BackButton_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="7" Grid.Column="1"/>
+    </Grid>
+</ContentPage>

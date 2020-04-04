@@ -13,12 +13,12 @@ using Xamarin.Forms.Xaml;
 namespace GeolocalisationFO_Admin
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AllChambers : ContentPage
+    public partial class AllTechnicians : ContentPage
     {
-        private List<Chambre> Chambers;
-        private Chambre Chambre;
+        private List<Technicien> Techniciens;
+        private Technicien Technicien;
 
-        public AllChambers()
+        public AllTechnicians()
         {
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
@@ -30,21 +30,21 @@ namespace GeolocalisationFO_Admin
             bool resp = await DisplayAlert("Confirmation", "Voulez vous supprimer cette chambre?", "Oui", "Non");
             if (resp)
             {
-                var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/DeleteChamber");
+                var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/DeleteTechnician");
                 req.Method = "DELETE";
                 req.ContentType = "application/json";
-                var bytesChamber = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Chambre));
-                req.GetRequestStream().Write(bytesChamber, 0, bytesChamber.Length);
+                var bytesTechnicien = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Technicien));
+                req.GetRequestStream().Write(bytesTechnicien, 0, bytesTechnicien.Length);
                 var reqResp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
-                if (reqResp.Equals("Chamber deleted Successfully"))
+                if(reqResp.Equals("Technician deleted Successfully"))
                 {
-                    await DisplayAlert("Succés", "Chambre supprimée avec succés", "Ok");
-                    Chambers.Remove(Chambre);
-                    await Device.InvokeOnMainThreadAsync(() => {
+                    await DisplayAlert("Succés","Technicien supprimé avec succés","Ok");
+                    Techniciens.Remove(Technicien);                    
+                    await Device.InvokeOnMainThreadAsync(()=>{ 
                         DeleteButton.IsEnabled = false;
                         EditButton.IsEnabled = false;
-                        CurrentChamber.Text = "";
-                        ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(x => x.Nom));
+                        CurrentTechnician.Text = "";
+                        TechniciansListView.ItemsSource = new ObservableCollection<String>(Techniciens.Select(x => x.Nom)); 
                     });
                 }
                 else
@@ -57,42 +57,42 @@ namespace GeolocalisationFO_Admin
         private void EditButton_Clicked(object sender, EventArgs e)
         {
             //Disable The buttons and clear the text
-            Device.BeginInvokeOnMainThread(() => 
+            Device.BeginInvokeOnMainThread(() =>
             {
-                CurrentChamber.Text = "";
+                CurrentTechnician.Text = "";
                 EditButton.IsEnabled = false;
                 DeleteButton.IsEnabled = false;
             });
             //Open the ChambreEdit page
-            Navigation.PushAsync(new ChamberEdit(Chambre));
+            Navigation.PushAsync(new TechnicianEdit(Technicien));
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
-              
+
         protected override void OnAppearing()
         {
-            ChambersListView.SelectedItem = null;
-            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/GetChambers");
+            TechniciansListView.SelectedItem = null;
+            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/GetTechnicians");
             req.Method = "GET";
             var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
-            Chambers = JsonConvert.DeserializeObject<List<Chambre>>(resp);
-            Device.BeginInvokeOnMainThread(() => 
+            Techniciens = JsonConvert.DeserializeObject<List<Technicien>>(resp);
+            Device.BeginInvokeOnMainThread(() =>
             {
-                ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(x=>x.Nom));
+                TechniciansListView.ItemsSource = new ObservableCollection<String>(Techniciens.Select(x => x.Nom));
             });
         }
 
-        private void ChambersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void TechniciansListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (ChambersListView.SelectedItem != null)
+            if (TechniciansListView.SelectedItem != null)
             {
-                Chambre = Chambers.FirstOrDefault(x => x.Nom == ChambersListView.SelectedItem.ToString());
-                CurrentChamber.Text = $"Nom: {Chambre.Nom}\n\n\n\nLongitude: {Chambre.Longitude}\n\n\n\nLatitude: {Chambre.Latitude}";
+                Technicien = Techniciens.First(x => x.Nom.Equals(TechniciansListView.SelectedItem.ToString()));
                 Device.BeginInvokeOnMainThread(() =>
                 {
+                    CurrentTechnician.Text = $"Nom: {Technicien.Nom}\n\n\nLogin: {Technicien.Login}\n\n\nMot de passe: {Technicien.MotDePasse}";
                     DeleteButton.IsEnabled = true;
                     EditButton.IsEnabled = true;
                 });
