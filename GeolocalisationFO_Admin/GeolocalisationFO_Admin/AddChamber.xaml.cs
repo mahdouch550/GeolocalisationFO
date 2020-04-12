@@ -16,8 +16,6 @@ namespace GeolocalisationFO_Admin
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddChamber : ContentPage
     {
-        private List<Chambre> Chambers;        
-
         public AddChamber()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -32,13 +30,19 @@ namespace GeolocalisationFO_Admin
                 try
                 {
                     var chambre = new Chambre { Nom = ChamberNameEntry.Text, Longitude = float.Parse(LongitudeEntry.Text), Latitude = float.Parse(LatitudeEntry.Text) };
-                    Chambers.Add(chambre);
-                    File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chambers.json"), JsonConvert.SerializeObject(Chambers));
-                    if(SendChamber(chambre))
+                    if (SendChamber(chambre).Equals("Chamber Added Successfully"))
+                    {
                         DisplayAlert("Succés", "Chambre ajoutée avec succés", "Ok");
-                    ChamberNameEntry.Text = "";
-                    LongitudeEntry.Text = "";
-                    LatitudeEntry.Text = "";
+                        ChamberNameEntry.Text = "";
+                        LongitudeEntry.Text = "";
+                        LatitudeEntry.Text = "";
+                    }
+
+                    if (SendChamber(chambre).Equals("Chamber Name exists in the database"))
+                    {
+                        DisplayAlert("Érreur", "Chambre de même nom existe déja", "Ok");                        
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -62,16 +66,16 @@ namespace GeolocalisationFO_Admin
             Navigation.PopAsync();
         }
 
-        private bool SendChamber(Chambre chambre)
+        private String SendChamber(Chambre chambre)
         {
-            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/AddChamber");
+            var req = WebRequest.CreateHttp(Constants.AddChamberURL);
             req.Method = "POST";
             req.ContentType = "application/json";
             var jsonChambre = JsonConvert.SerializeObject(chambre);
             var byteArrayChambre = Encoding.UTF8.GetBytes(jsonChambre);
             req.GetRequestStream().Write(byteArrayChambre, 0, byteArrayChambre.Length);
-            var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
-            return resp.Equals("Chamber Added Successfully");
+            var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();            
+            return resp;
         }
     }
 }

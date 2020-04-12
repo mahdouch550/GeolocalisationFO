@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace GeolocalisationFO_Admin
 {
@@ -7,8 +8,19 @@ namespace GeolocalisationFO_Admin
         public App()
         {
             InitializeComponent();
-
-            MainPage = new  NavigationPage(new MainPage());
+            try
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            catch(Exception ew)
+            {
+                Console.WriteLine(ew.Message);
+                while(ew.InnerException != null)
+                {
+                    ew = ew.InnerException;
+                    Console.WriteLine(ew.Message);
+                }
+            }
         }
 
         protected override void OnStart()

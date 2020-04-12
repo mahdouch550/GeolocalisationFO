@@ -41,7 +41,7 @@ namespace GeolocalisationFO_Admin
                     //Create a byte array of the jon object for the request
                     var bytesChambers = Encoding.UTF8.GetBytes(jsonChambers);
                     //Create the request
-                    var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/UpdateChamber");
+                    var req = WebRequest.CreateHttp(Constants.UpdateChamberURL);
                     //Set the request method to put
                     req.Method = "PUT";
                     //Set the request content-type to application/json

@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace GeolocalisationFO.iOS
+namespace GeolocalisationFO_Client.iOS
 {
     public class Application
     {

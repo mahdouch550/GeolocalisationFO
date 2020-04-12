@@ -172,13 +172,50 @@ namespace GeolocalisationFO_Admin_Web.Controllers
                     cmd.Connection = cn;
                     if (cmd.Connection.State != System.Data.ConnectionState.Open)
                         cmd.Connection.Open();
-                    var reader = cmd.ExecuteReader();
+                    var reader = default(SqlDataReader);
+                    try
+                    {
+                        reader = cmd.ExecuteReader();
+                    }
+                    catch (SqlException ex)
+                    {
+                        return new OkObjectResult("Chamber Name exists in the database");
+                    }
                     reader.Read();
                     var result = reader.GetValue(0).ToString();
                     if (result.Equals("true"))
                         return new OkObjectResult("Chamber Added Successfully");
                     else
                         return new BadRequestObjectResult("Chamber not added");
+                }
+            }
+        }
+
+        [HttpPost(Name = "AddTask")]
+        [Route("AddTask")]
+        public ActionResult AddTask([FromBody] JObject jsonTask)
+        {
+            var task = jsonTask.ToObject<Tache>();
+            using (var cmd = new SqlCommand())
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "sp_add_task";
+                cmd.Parameters.AddWithValue("@technicianid", task.Technicien.Nom);
+                cmd.Parameters.AddWithValue("@chamberid", task.Chambre.Nom);
+                cmd.Parameters.AddWithValue("@taskdescription", task.DescriptionTache);
+                using (var cn = new SqlConnection(ConnectionString))
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State != System.Data.ConnectionState.Open)
+                        cmd.Connection.Open();
+                    var reader = default(SqlDataReader);                    
+                    reader = cmd.ExecuteReader();                    
+                    reader.Read();
+                    var result = reader.GetValue(0).ToString();
+                    if (result.Equals("true"))
+                        return new OkObjectResult("Task Added Successfully");
+                    else
+                        return new BadRequestObjectResult("Task not added");
                 }
             }
         }
@@ -207,6 +244,35 @@ namespace GeolocalisationFO_Admin_Web.Controllers
                         return new BadRequestObjectResult("Chamber not deleted");
                 }
             }
+        }
+
+        [HttpDelete(Name = "DeleteTask")]
+        [Route("DeleteTask")]
+        public ActionResult DeleteTask(String TaskID)
+        {
+            using (var cmd = new SqlCommand())
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "sp_delete_task";
+                cmd.Parameters.AddWithValue("@taskid", TaskID);
+                using (var cn = new SqlConnection(ConnectionString))
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State != System.Data.ConnectionState.Open)
+                        cmd.Connection.Open();
+                    var reader = cmd.ExecuteReader();
+                    reader.Read();
+                    if (reader.HasRows)
+                    {
+                        var result = reader.GetValue(0).ToString();
+                        if (result.Equals("true"))
+                            return new OkObjectResult("Task deleted Successfully");
+                        else
+                            return new BadRequestObjectResult("Task not deleted");
+                    }
+                }
+            }
+            return null;
         }
 
         [HttpPut(Name = "UpdateChamber")]
@@ -266,6 +332,116 @@ namespace GeolocalisationFO_Admin_Web.Controllers
                     {
                         return false;
                     }
+                }
+            }
+        }
+
+        private Technicien GetTechnicien(String TechnicianName)
+        {
+            using (var cn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State == System.Data.ConnectionState.Closed)
+                        cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select nom, login, motdepasse from techniciens where nom = '{TechnicianName}'";
+                    var reader = cmd.ExecuteReader();
+                    reader.Read();
+                    if(reader.HasRows)
+                        return new Technicien { Nom = reader.GetString(0), Login = reader.GetString(1), MotDePasse = reader.GetString(2) };
+                }
+            }
+            return null;
+        }
+
+        private Chambre GetChamber(String ChambreName)
+        {
+            using (var cn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State == System.Data.ConnectionState.Closed)
+                        cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select nom, longitude, latitude from chamres where nom = {ChambreName}";
+                    var reader = cmd.ExecuteReader();
+                    reader.Read();
+                    if(reader.HasRows)
+                        return new Chambre { Nom = reader.GetString(0), Latitude = reader.GetFloat(1), Longitude = reader.GetFloat(2) };
+                }
+            }
+            return null;
+        }
+
+        [HttpGet(Name = "GetMyTasks")]
+        [Route("GetMyTasks")]
+        public List<Tache> GetMyTasks(String TechnicianName)
+        {
+            using (var cn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State == System.Data.ConnectionState.Closed)
+                        cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from taches where technicianid = '{TechnicianName}'";
+                    var reader = cmd.ExecuteReader();
+                    var output = new List<Tache>();
+                    while (reader.Read())
+                    {
+                        var tmpTask = new Tache();
+                        tmpTask.ID = reader.GetInt32(0);
+                        tmpTask.Technicien = GetTechnicien(reader.GetString(1));
+                        try
+                        {
+                            tmpTask.Chambre = GetChamber(reader.GetString(2));
+                        }
+                        catch
+                        {}
+                        tmpTask.DescriptionTache = reader.GetString(3);
+                        tmpTask.TacheFinie = reader.GetBoolean(4);
+                        output.Add(tmpTask);
+                    }
+                    return output;
+                }
+            }
+        }
+
+        [HttpGet(Name = "GetAllTasks")]
+        [Route("GetAllTasks")]
+        public List<Tache> GetAllTasks()
+        {
+            using (var cn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    if (cmd.Connection.State == System.Data.ConnectionState.Closed)
+                        cmd.Connection.Open();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = $"select * from taches";
+                    var reader = cmd.ExecuteReader();
+                    var output = new List<Tache>();
+                    while (reader.Read())
+                    {
+                        var tmpTask = new Tache();
+                        tmpTask.ID = reader.GetInt32(0);
+                        tmpTask.Technicien = GetTechnicien(reader.GetString(1));
+                        try
+                        {
+                            tmpTask.Chambre = GetChamber(reader.GetString(2));
+                        }
+                        catch
+                        { }
+                        tmpTask.DescriptionTache = reader.GetString(3);
+                        tmpTask.TacheFinie = reader.GetBoolean(4);
+                        output.Add(tmpTask);
+                    }
+                    return output;
                 }
             }
         }

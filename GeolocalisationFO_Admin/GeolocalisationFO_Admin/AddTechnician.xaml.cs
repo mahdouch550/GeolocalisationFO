@@ -64,7 +64,7 @@ namespace GeolocalisationFO_Admin
 
         private bool SendTechnician(Technicien technicien)
         {
-            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/AddTechnician");
+            var req = WebRequest.CreateHttp(Constants.AddTechnicianURL);
             req.Method = "POST";
             req.ContentType = "application/json";
             var jsonTechnicien = JsonConvert.SerializeObject(technicien);

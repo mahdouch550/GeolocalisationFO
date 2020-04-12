@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeolocalisationFO_Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace GeolocalisationFO_Admin
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
+            var t = Constants.AddChamberURL;
         }
 
         public void AddChamber_Clicked(object sender, EventArgs e)
@@ -43,6 +45,16 @@ namespace GeolocalisationFO_Admin
         protected override bool OnBackButtonPressed()
         {
             return true;
+        }
+
+        private void AddTask_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddTask());
+        }
+
+        private void AllTasks_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

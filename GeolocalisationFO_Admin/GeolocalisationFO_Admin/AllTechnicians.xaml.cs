@@ -30,7 +30,7 @@ namespace GeolocalisationFO_Admin
             bool resp = await DisplayAlert("Confirmation", "Voulez vous supprimer cette chambre?", "Oui", "Non");
             if (resp)
             {
-                var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/DeleteTechnician");
+                var req = WebRequest.CreateHttp(Constants.DeleteTechnicianURL);
                 req.Method = "DELETE";
                 req.ContentType = "application/json";
                 var bytesTechnicien = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Technicien));
@@ -75,7 +75,7 @@ namespace GeolocalisationFO_Admin
         protected override void OnAppearing()
         {
             TechniciansListView.SelectedItem = null;
-            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/GetTechnicians");
+            var req = WebRequest.CreateHttp(Constants.GetTechniciansURL);
             req.Method = "GET";
             var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
             Techniciens = JsonConvert.DeserializeObject<List<Technicien>>(resp);

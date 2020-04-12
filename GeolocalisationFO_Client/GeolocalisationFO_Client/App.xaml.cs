@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace GeolocalisationFO
+namespace GeolocalisationFO_Client
 {
     public partial class App : Application
     {

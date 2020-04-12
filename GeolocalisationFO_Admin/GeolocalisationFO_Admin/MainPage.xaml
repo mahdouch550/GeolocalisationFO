@@ -11,6 +11,8 @@
         <Button Text="Tous les chambres" x:Name="AllChambers" Clicked="AllChambers_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
         <Button Text="Ajouter Technicien" x:Name="AddTechnician" Clicked="AddTechnician_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
         <Button Text="Tous les Techniciens" x:Name="AllTechnicians" Clicked="AllTechnicians_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="1"/>
+        <Button Text="Ajouter tache" x:Name="AddTask" Clicked="AddTask_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" Grid.Column="0"/>
+        <Button Text="Tous les Tâches" x:Name="AllTasks" Clicked="AllTasks_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 
 </ContentPage>

@@ -28,7 +28,7 @@ namespace GeolocalisationFO_Admin
                 LoginButton.IsEnabled = false;
                 var admin = new Admin { Login = AdminLoginEntry.Text, MotDePasse = PasswordEntry.Text };
                 var bytesAdmin = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(admin));
-                var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/VerifyAdminLogin");
+                var req = WebRequest.CreateHttp(Constants.VerifyAdminLoginURL);
                 req.ContentType = "application/json";
                 req.Method = "POST";
                 req.GetRequestStream().Write(bytesAdmin, 0, bytesAdmin.Length);

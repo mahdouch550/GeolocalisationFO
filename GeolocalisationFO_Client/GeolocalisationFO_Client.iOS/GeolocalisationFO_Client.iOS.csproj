@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A637DC37-4987-4DAD-A220-BA3EFB9B0AB7}</ProjectGuid>
+    <ProjectGuid>{F47F92E2-DBBD-48D2-A68F-0458807B82F6}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GeolocalisationFO.iOS</RootNamespace>
+    <RootNamespace>GeolocalisationFO_Client.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>GeolocalisationFO.iOS</AssemblyName>
+    <AssemblyName>GeolocalisationFO_Client.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
@@ -127,9 +127,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\GeolocalisationFO\GeolocalisationFO.csproj">
-      <Project>{E079B4F3-5BC9-49E6-B91A-F8DECB02DBE5}</Project>
-      <Name>GeolocalisationFO</Name>
+    <ProjectReference Include="..\GeolocalisationFO_Client\GeolocalisationFO_Client.csproj">
+      <Project>{3AEF31EA-56BC-4B2D-A574-15C490B1B958}</Project>
+      <Name>GeolocalisationFO_Client</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

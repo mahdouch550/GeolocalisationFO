@@ -22,7 +22,11 @@ namespace GeolocalisationFO_Admin
         {
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
-            InitializeComponent();            
+            InitializeComponent();
+            //ChambersListView = new ListView
+            //{
+            //    ItemTemplate = new DataTemplate(typeof(MyCell))
+            //};
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -30,7 +34,7 @@ namespace GeolocalisationFO_Admin
             bool resp = await DisplayAlert("Confirmation", "Voulez vous supprimer cette chambre?", "Oui", "Non");
             if (resp)
             {
-                var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/DeleteChamber");
+                var req = WebRequest.CreateHttp(Constants.DeleteChamberURL);
                 req.Method = "DELETE";
                 req.ContentType = "application/json";
                 var bytesChamber = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Chambre));
@@ -49,7 +53,7 @@ namespace GeolocalisationFO_Admin
                 }
                 else
                 {
-                    DisplayAlert("Échec", "Suppresion a échoué", "Ok");
+                    await DisplayAlert("Échec", "Suppresion a échoué", "Ok");
                 }
             }
         }
@@ -75,7 +79,7 @@ namespace GeolocalisationFO_Admin
         protected override void OnAppearing()
         {
             ChambersListView.SelectedItem = null;
-            var req = WebRequest.CreateHttp("http://192.168.43.175:52640/api/GeolocalisationFO/GetChambers");
+            var req = WebRequest.CreateHttp(Constants.GetChambersURL);
             req.Method = "GET";
             var resp = new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd();
             Chambers = JsonConvert.DeserializeObject<List<Chambre>>(resp);
