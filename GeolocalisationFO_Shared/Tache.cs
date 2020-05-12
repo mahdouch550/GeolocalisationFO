@@ -1,13 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GeolocalisationFO_Shared
 {
     public class Tache
     {
-        public Technicien Technicien { get; set; }
-        public Chambre Chambre { get; set; }
-        public String DescriptionTache { get; set; }
+        public String TechnicianLogin { get; set; }
+        public String ChamberID { get; set; }
+        public String TaskDescription { get; set; }
+        [Key]
         public int ID { get; set; }
-        public bool TacheFinie { get; set; }
+        public bool TaskFinished { get; set; }
     }
 }

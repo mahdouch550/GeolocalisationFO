@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="GeolocalisationFO_Client.MyTasksPage">
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".4*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".2*"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="MyTasksListView" Grid.Row="0" Grid.Column="0" ItemSelected="MyTasksListView_ItemSelected" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label x:Name="TaskDetailsLabel" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" LineBreakMode="WordWrap"/>
+            <Label x:Name="TaskDescriptionLabel" Grid.Row="1"  Grid.ColumnSpan="4" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Start" LineBreakMode="WordWrap"/>
+            <!--<maps:Map x:Name="MapView" Grid.Row="1" Grid.ColumnSpan="4"/>-->
+            <Button Text="Marquer finie" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False" HorizontalOptions="Center" x:Name="MarkFinishedButton" Clicked="MarkFinishedButton_Clicked"/>
+            <Button Text="Retour" VerticalOptions="Center" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" x:Name="BackButton" Clicked="BackButton_Clicked"/>            
+        </Grid>
+</ContentPage>

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F47F92E2-DBBD-48D2-A68F-0458807B82F6}</ProjectGuid>
+    <ProjectGuid>{FF195F3D-4017-4C33-B128-3F204BD3C780}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
@@ -122,13 +122,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\GeolocalisationFO_Client\GeolocalisationFO_Client.csproj">
-      <Project>{3AEF31EA-56BC-4B2D-A574-15C490B1B958}</Project>
+      <Project>{5F3A4BCC-E726-4C71-A7C4-DC8EF05A6197}</Project>
       <Name>GeolocalisationFO_Client</Name>
     </ProjectReference>
   </ItemGroup>

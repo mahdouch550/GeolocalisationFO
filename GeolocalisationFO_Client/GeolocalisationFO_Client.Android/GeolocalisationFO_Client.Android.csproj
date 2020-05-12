@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0D4F9D04-84B0-4837-946A-1C3891ECF8D7}</ProjectGuid>
+    <ProjectGuid>{25E39F54-380B-4374-AF8B-3B49BA5A0F63}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
@@ -53,7 +53,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.GooglePlayServices.Maps">
       <Version>71.1610.0</Version>
@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeolocalisationFO_Client\GeolocalisationFO_Client.csproj">
-      <Project>{3AEF31EA-56BC-4B2D-A574-15C490B1B958}</Project>
+      <Project>{5F3A4BCC-E726-4C71-A7C4-DC8EF05A6197}</Project>
       <Name>GeolocalisationFO_Client</Name>
     </ProjectReference>
   </ItemGroup>

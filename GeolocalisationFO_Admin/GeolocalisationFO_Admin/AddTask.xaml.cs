@@ -40,7 +40,7 @@ namespace GeolocalisationFO_Admin
                 {
                     var req = WebRequest.CreateHttp(Constants.AddTaskURL);
                     req.Method = "POST";
-                    var tache = new Tache { DescriptionTache = TaskDescriptionEditor.Text, Chambre = Chambers.FirstOrDefault(x => x.Nom == ChamberPicker.SelectedItem.ToString()), Technicien = Techniciens.FirstOrDefault(x => x.Nom == TechnicianPicker.SelectedItem.ToString()) };
+                    var tache = new Tache { TaskDescription = TaskDescriptionEditor.Text, ChamberID = Chambers.FirstOrDefault(x => x.Nom == ChamberPicker.SelectedItem.ToString()).Nom, TechnicianLogin = Techniciens.FirstOrDefault(x => x.Nom == TechnicianPicker.SelectedItem.ToString()).Login };
                     var byteArratTask = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tache));
                     req.ContentType = "application/json";
                     req.GetRequestStream().Write(byteArratTask, 0, byteArratTask.Length);
@@ -87,7 +87,7 @@ namespace GeolocalisationFO_Admin
             Techniciens = JsonConvert.DeserializeObject<List<Technicien>>(new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd());
             Device.BeginInvokeOnMainThread(() =>
             {
-                TechnicianPicker.ItemsSource = new ObservableCollection<String>(Techniciens.Select(y => y.Nom));
+                TechnicianPicker.ItemsSource = new ObservableCollection<String>(Techniciens.Select(y => y.Login));
                 ChamberPicker.ItemsSource = new ObservableCollection<String>(Chambers.Select(y => y.Nom));
             });
         }

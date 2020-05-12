@@ -3,24 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              x:Class="GeolocalisationFO_Admin.AllChambers">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height=".9*" />
-            <RowDefinition Height=".1*" />
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".9*" />
+                <RowDefinition Height=".1*" />
+                <RowDefinition Height=".5*" />
+            </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
-            <ListView x:Name="ChambersListView" ItemSelected="ChambersListView_ItemSelected"/>
-        </ScrollView>
+            <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
+                <ListView x:Name="ChambersListView" ItemSelected="ChambersListView_ItemSelected"/>
+            </ScrollView>
 
-        <Label x:Name="CurrentChamber" Grid.Column="2" Grid.RowSpan="2"/>
+            <Label x:Name="CurrentChamber" Grid.Column="2" Grid.RowSpan="2"/>
 
-        <Button Text="Supprimer" x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Grid.Row="1" Grid.Column="0"  IsEnabled="False"/>
-        <Button Text="Modifier" x:Name="EditButton" Clicked="EditButton_Clicked" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
-        <Button Text="Retour" x:Name=" BackButton" Clicked="BackButton_Clicked" Grid.Row="1" Grid.Column="2" />
-    </Grid>    
-    
+            <Button Text="Supprimer" x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Grid.Row="1" Grid.Column="0"  IsEnabled="False"/>
+            <Button Text="Modifier" x:Name="EditButton" Clicked="EditButton_Clicked" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+            <Button Text="Retour" x:Name=" BackButton" Clicked="BackButton_Clicked" Grid.Row="1" Grid.Column="2" />
+            <maps:Map x:Name="ChambersMap" Grid.Row="2" Grid.ColumnSpan ="3"/>
+        </Grid>
+    </ScrollView>
+
 </ContentPage>
- 

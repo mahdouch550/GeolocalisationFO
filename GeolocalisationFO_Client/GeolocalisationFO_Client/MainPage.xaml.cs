@@ -1,21 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GeolocalisationFO_Shared;
+using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GeolocalisationFO_Client
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private Technicien Technicien;
+
+        public MainPage(Technicien technicien)
         {
             InitializeComponent();
+            Technicien = technicien;
+        }
+
+        private void MyTasksButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MyTasksPage(Technicien));
+        }
+
+        private void ChambersButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AllChambers());
         }
     }
 }

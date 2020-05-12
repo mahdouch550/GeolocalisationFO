@@ -18,8 +18,8 @@
             <Picker Title="Technicien" x:Name="TechnicianPicker" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Grid.ColumnSpan="2" />
             <Picker Title="Chambre" x:Name="ChamberPicker" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" Grid.ColumnSpan="2" />
             <Editor x:Name="TaskDescriptionEditor" Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center" Grid.ColumnSpan="2" AutoSize="TextChanges"/>
-            <Button Text="Valider" Grid.Row="4" Grid.Column="0" x:Name="ValidateButton" Clicked="ValidateButton_Clicked"/>
-            <Button Text="Retour" Grid.Row="4" Grid.Column="1" x:Name="BackButton" Clicked="BackButton_Clicked"/>
+            <Button Text="Valider" Grid.Row="4" Grid.Column="0" x:Name="ValidateButton" Clicked="ValidateButton_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Text="Retour" Grid.Row="4" Grid.Column="1" x:Name="BackButton" Clicked="BackButton_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -10,7 +10,7 @@ namespace GeolocalisationFO_Admin
             InitializeComponent();
             try
             {
-                MainPage = new NavigationPage(new MainPage());
+                MainPage = new NavigationPage(new AdminLogin());
             }
             catch(Exception ew)
             {

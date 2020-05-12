@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace GeolocalisationFO_Admin
@@ -17,16 +18,19 @@ namespace GeolocalisationFO_Admin
     {
         private List<Chambre> Chambers;
         private Chambre Chambre;
+        private Geocoder Geocoder;
 
         public AllChambers()
         {
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
-            //ChambersListView = new ListView
-            //{
-            //    ItemTemplate = new DataTemplate(typeof(MyCell))
-            //};
+            Geocoder = new Geocoder();
+            Position position = new Position(34.741094, 10.752437);
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+            MainGrid.Children.Remove(ChambersMap);
+            ChambersMap = new Map(mapSpan) { MapType = MapType.Satellite };
+            MainGrid.Children.AddVertical(ChambersMap);
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -86,6 +90,18 @@ namespace GeolocalisationFO_Admin
             Device.BeginInvokeOnMainThread(() => 
             {
                 ChambersListView.ItemsSource = new ObservableCollection<String>(Chambers.Select(x=>x.Nom));
+                Chambers.ForEach( async x=> 
+                {
+                    Position position = new Position(x.Latitude, x.Longitude);
+                    IEnumerable<string> possibleAddresses = await Geocoder.GetAddressesForPositionAsync(position);
+                    string address = possibleAddresses.FirstOrDefault();
+                    ChambersMap.Pins.Add(new Pin 
+                    {
+                        Label = x.Nom,
+                        Address = possibleAddresses.FirstOrDefault(),
+                        Position = position
+                    });
+                });
             });
         }
 

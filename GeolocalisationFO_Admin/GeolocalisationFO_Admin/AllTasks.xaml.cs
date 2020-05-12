@@ -1,9 +1,8 @@
-﻿using System;
+﻿using GeolocalisationFO_Shared;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.IO;
+using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +14,11 @@ namespace GeolocalisationFO_Admin
         public AllTasks()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            
         }
     }
 }

@@ -30,7 +30,10 @@ namespace GeolocalisationFO_Admin
                 try
                 {
                     var chambre = new Chambre { Nom = ChamberNameEntry.Text, Longitude = float.Parse(LongitudeEntry.Text), Latitude = float.Parse(LatitudeEntry.Text) };
-                    if (SendChamber(chambre).Equals("Chamber Added Successfully"))
+                    var chamberInsertResult = SendChamber(chambre);
+
+
+                    if (chamberInsertResult.Equals("Chamber Added Successfully"))
                     {
                         DisplayAlert("Succés", "Chambre ajoutée avec succés", "Ok");
                         ChamberNameEntry.Text = "";
@@ -38,7 +41,7 @@ namespace GeolocalisationFO_Admin
                         LatitudeEntry.Text = "";
                     }
 
-                    if (SendChamber(chambre).Equals("Chamber Name exists in the database"))
+                    if (chamberInsertResult.Equals("Chamber Name exists in the database"))
                     {
                         DisplayAlert("Érreur", "Chambre de même nom existe déja", "Ok");                        
                     }
