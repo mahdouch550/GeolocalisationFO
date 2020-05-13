@@ -43,7 +43,8 @@ namespace GeolocalisationFO_Admin_Web.Controllers
         [Route("GetMyTasks")]
         public List<Tache> GetMyTasks(String TechnicianLogin)
         {
-            return geolocalisationFOContext.Taches.Where(x => x.TechnicianLogin.Equals(TechnicianLogin)).ToList();
+            var taches = geolocalisationFOContext.Taches.ToList();
+            return taches.Where(x => x.TechnicianID.Equals(TechnicianLogin)).ToList();
         }
 
         [HttpGet(Name = "GetAllTasks")]

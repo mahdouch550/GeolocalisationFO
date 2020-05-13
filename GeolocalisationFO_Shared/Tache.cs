@@ -5,7 +5,7 @@ namespace GeolocalisationFO_Shared
 {
     public class Tache
     {
-        public String TechnicianLogin { get; set; }
+        public String TechnicianID { get; set; }
         public String ChamberID { get; set; }
         public String TaskDescription { get; set; }
         [Key]

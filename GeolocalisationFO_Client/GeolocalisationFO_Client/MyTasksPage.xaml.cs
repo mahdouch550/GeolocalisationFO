@@ -40,7 +40,7 @@ namespace GeolocalisationFO_Client
             Taches = JsonConvert.DeserializeObject<List<Tache>>(stringResponse);
             Device.BeginInvokeOnMainThread(() =>
             {
-                MyTasksListView.ItemsSource = new ObservableCollection<String>(Taches.Select(x => $"{x.ID} - {x.TechnicianLogin} - {x.ChamberID}"));
+                MyTasksListView.ItemsSource = new ObservableCollection<String>(Taches.Select(x => $"{x.ID} - {x.TechnicianID} - {x.ChamberID}"));
             });
             request = WebRequest.CreateHttp(Constants.GetChambersURL);
             request.Method = "GET";
@@ -109,7 +109,7 @@ namespace GeolocalisationFO_Client
                 }
                 MapView.Pins.Add(pin);
                 MapView.MoveToRegion(ms);
-                TaskDetailsLabel.Text = $"ID: {selectedTask.ChamberID}\n\nTechnicien: {selectedTask.TechnicianLogin}\n\nChambre: {selectedTask.ChamberID}";
+                TaskDetailsLabel.Text = $"ID: {selectedTask.ChamberID}\n\nTechnicien: {selectedTask.TechnicianID}\n\nChambre: {selectedTask.ChamberID}";
                 var status = selectedTask.TaskFinished ? "Finie" : "Non Finie";
                 TaskDescriptionLabel.Text = "Tâche:\n"+ selectedTask.TaskDescription+$"\nStatus: {status}";
             });

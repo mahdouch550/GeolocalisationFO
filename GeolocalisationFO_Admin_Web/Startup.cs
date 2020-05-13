@@ -25,7 +25,7 @@ namespace GeolocalisationFO_Admin_Web
         {            
             services.AddDbContext<GeolocailsationFOContext>(opt => 
             { 
-                opt.UseSqlServer("Data Source=188.121.44.214;Integrated Security=False;User ID=engineer;Initial Catalog=GeolocalisationFO;Password=CesarRosa2018;Connect Timeout=15;Encrypt=False;Packet Size=4096");
+                opt.UseSqlServer("Data Source=188.121.44.214;Integrated Security=False;User ID=bilel;Connect Timeout=15;Encrypt=False;Packet Size=4096; Password=bilel123123");
             }); 
             services.AddControllers().AddNewtonsoftJson();
         }
