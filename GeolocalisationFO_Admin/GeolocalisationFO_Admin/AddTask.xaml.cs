@@ -40,7 +40,7 @@ namespace GeolocalisationFO_Admin
                 {
                     var req = WebRequest.CreateHttp(Constants.AddTaskURL);
                     req.Method = "POST";
-                    var tache = new Tache { TaskDescription = TaskDescriptionEditor.Text, ChamberID = Chambers.FirstOrDefault(x => x.Nom == ChamberPicker.SelectedItem.ToString()).Nom, TechnicianID = Techniciens.FirstOrDefault(x => x.Nom == TechnicianPicker.SelectedItem.ToString()).Login };
+                    var tache = new Tache { TaskDescription = TaskDescriptionEditor.Text, ChamberID = Chambers.FirstOrDefault(x => x.Nom == ChamberPicker.SelectedItem.ToString()).Nom, TechnicianID = Techniciens.FirstOrDefault(x => x.Login == TechnicianPicker.SelectedItem.ToString()).Login };
                     var byteArratTask = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tache));
                     req.ContentType = "application/json";
                     req.GetRequestStream().Write(byteArratTask, 0, byteArratTask.Length);

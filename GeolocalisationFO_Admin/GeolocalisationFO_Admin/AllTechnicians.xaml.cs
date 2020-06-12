@@ -20,7 +20,6 @@ namespace GeolocalisationFO_Admin
 
         public AllTechnicians()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();            
         }

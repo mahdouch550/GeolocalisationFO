@@ -19,16 +19,15 @@ namespace GeolocalisationFO_Admin
         private List<Chambre> Chambers;
         private Chambre Chambre;
         private Geocoder Geocoder;
+        private Map ChambersMap;
 
         public AllChambers()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
             Geocoder = new Geocoder();
             Position position = new Position(34.741094, 10.752437);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            MainGrid.Children.Remove(ChambersMap);
             ChambersMap = new Map(mapSpan) { MapType = MapType.Satellite };
             MainGrid.Children.AddVertical(ChambersMap);
         }

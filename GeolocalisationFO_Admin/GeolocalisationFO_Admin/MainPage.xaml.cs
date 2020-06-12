@@ -19,7 +19,6 @@ namespace GeolocalisationFO_Admin
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
-            var t = Constants.AddChamberURL;
         }
 
         public void AddChamber_Clicked(object sender, EventArgs e)
@@ -54,7 +53,7 @@ namespace GeolocalisationFO_Admin
 
         private void AllTasks_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new AllTasks());
         }
     }
 }

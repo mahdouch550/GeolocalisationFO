@@ -4,8 +4,8 @@ namespace GeolocalisationFO_Shared
 {
     public class Constants
     {
-        private static String Port = "82";
-        private static String IPAddress = "192.168.43.175";
+        private static String Port = "83";
+        private static String IPAddress = "192.168.1.70";
         public static readonly String APIURL = "http://" + IPAddress + ":" + Port + "/api/GeolocalisationFO/";
 
         //GET Methods URLs

@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeolocalisationFO_Client.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeolocalisationFO_Client.iOS", "GeolocalisationFO_Client\GeolocalisationFO_Client.iOS\GeolocalisationFO_Client.iOS.csproj", "{FF195F3D-4017-4C33-B128-3F204BD3C780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeolocalisationFO_Client", "GeolocalisationFO_Client\GeolocalisationFO_Client\GeolocalisationFO_Client.csproj", "{5E18492A-A849-465A-B4F7-97DD43798324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeolocalisationFO_Client", "GeolocalisationFO_Client\GeolocalisationFO_Client\GeolocalisationFO_Client.csproj", "{5E18492A-A849-465A-B4F7-97DD43798324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

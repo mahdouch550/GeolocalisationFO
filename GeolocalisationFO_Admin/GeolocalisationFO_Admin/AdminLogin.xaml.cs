@@ -35,7 +35,7 @@ namespace GeolocalisationFO_Admin
                 var result = bool.Parse(new StreamReader(req.GetResponse().GetResponseStream()).ReadToEnd());
                 if (result)
                 {
-                     Navigation.PushAsync(new MainPage());
+                     Navigation.PushAsync(new MainPage2());
                 }
                 else
                 {

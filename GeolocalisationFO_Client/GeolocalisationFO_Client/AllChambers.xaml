@@ -7,8 +7,8 @@
              x:Class="GeolocalisationFO_Client.AllChambers">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".9*" />
-            <RowDefinition Height=".1*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
